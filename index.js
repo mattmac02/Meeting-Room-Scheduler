@@ -58,3 +58,28 @@ class Meeting {
       }
     }
   }
+
+
+  const scheduler = new Scheduler();
+  
+  const bookForm = document.querySelector("form");
+  bookForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+  
+    const startTimeInput = document.getElementById("start-time");
+    const endTimeInput = document.getElementById("end-time");
+  
+    const startTime = new Date(startTimeInput.value);
+    const endTime = new Date(endTimeInput.value);
+  
+    if (scheduler.book(startTime, endTime)) {
+      startTimeInput.value = "";
+      endTimeInput.value = "";
+    } else {
+      alert("That time slot is already booked. Please choose another.");
+    }
+  });
+  
+  const cancelForm = document.querySelectorAll("form")[1];
+  cancelForm
+  
