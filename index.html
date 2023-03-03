@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meeting Room Scheduler</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Meeting Room Scheduler</h1>
+    <form>
+      <label for="start-time">Start Time:</label>
+      <input type="datetime-local" id="start-time" required />
+
+      <label for="end-time">End Time:</label>
+      <input type="datetime-local" id="end-time" required />
+
+      <button type="submit" id="book-btn">Book Meeting</button>
+    </form>
+
+    <script src="index.js"></script>
+  </body>
+</html>
