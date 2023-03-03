@@ -81,5 +81,17 @@ class Meeting {
   });
   
   const cancelForm = document.querySelectorAll("form")[1];
-  cancelForm
+  cancelForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+  
+    const startTimeInput = document.getElementById("cancel-time");
+  
+    const startTime = new Date(startTimeInput.value);
+  
+    if (scheduler.cancel(startTime)) {
+      startTimeInput.value = "";
+    } else {
+      alert("There is no meeting at that time to cancel.");
+    }
+  });
   
