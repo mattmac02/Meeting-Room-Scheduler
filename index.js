@@ -29,10 +29,8 @@ class Meeting {
           return false;
         }
       }
-  
       meetings.push(newMeeting); // Add new meeting to the meetings array of the specified room
       this.displaySchedule(roomIndex);
-  
       return true;
     }
   
@@ -42,15 +40,13 @@ class Meeting {
         if (meetings[i].start.getTime() === start.getTime()) {
           meetings.splice(i, 1); // Removing meeting from meetings array of the specified room
           this.displaySchedule(roomIndex);
-  
           return true;
         }
       }
-  
       return false;
     }
   
-    displaySchedule(roomIndex) {
+    displaySchedule(roomIndex) {        // Displaying the currently booked meeting slots
       const meetingsList = document.getElementById(`meetings-list-${roomIndex}`);
       meetingsList.innerHTML = "";
   
