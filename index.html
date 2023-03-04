@@ -1,33 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Meeting Room Scheduling Tool</title>
+    <title>Meeting Room Scheduler</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Meeting Rooms Scheduler</h1>
-    <form>
-      <label for="start-time">Start Time:</label>
-      <input type="datetime-local" id="start-time" required />
+    <h1>Pivotal Meeting Room Scheduler</h1>
 
-      <label for="end-time">End Time:</label>
-      <input type="datetime-local" id="end-time" required />
+    <h2>Room 1</h2>
+    <form class="book">
+      <label for="start-time-0">Start Time:</label><br>
+      <input type="datetime-local" id="start-time-0" class="start-time" required><br>
+      <label for="end-time-0">End Time:</label><br>
+      <input type="datetime-local" id="end-time-0" class="end-time" required><br>
+      <button type="submit">Book</button>
+    </form><br>
+    <ul id="meetings-list-0"></ul>
 
-      <button type="submit" id="book-btn">Book Meeting</button>
+    <form class="cancel">
+      <label for="cancel-time-0">Cancel Meeting at:</label><br>
+      <input type="datetime-local" id="cancel-time-0" class="cancel-time" required><br>
+      <button type="submit">Cancel</button>
     </form>
 
-    <div id="schedule">
-        <h2>Schedule:</h2>
-        <ul id="meetings-list"></ul>
-        <form>
-          <label for="cancel-time">Cancel Meeting:</label>
-          <input type="datetime-local" id="cancel-time" required />
-  
-          <button type="submit" id="cancel-btn">Cancel Meeting</button>
-        </form>
-      </div>
+    <h2>Room 2</h2>
+    <form class="book">
+      <label for="start-time-1">Start Time:</label><br>
+      <input type="datetime-local" id="start-time-1" class="start-time" required><br>
+      <label for="end-time-1">End Time:</label><br>
+      <input type="datetime-local" id="end-time-1" class="end-time" required><br>
+      <button type="submit">Book</button>
+    </form><br>
+    <ul id="meetings-list-1"></ul>
+    <form class="cancel">
+      <label for="cancel-time-1">Cancel Meeting at:</label><br>
+      <input type="datetime-local" id="cancel-time-1" class="cancel-time" required><br>
+      <button type="submit">Cancel</button>
+    </form>
 
     <script src="index.js"></script>
   </body>
