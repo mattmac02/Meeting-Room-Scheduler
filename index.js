@@ -12,32 +12,36 @@ class Meeting {
     }
   }
   
-
   class Scheduler {
-    constructor() {
-      this.meetings = [];
+    constructor(numRooms) {
+      this.rooms = [];
+      for (let i = 0; i < numRooms; i++) {
+        this.rooms.push({ meetings: [] });
+      }
     }
   
-    book(start, end) {
+    book(start, end, roomIndex) {
       const newMeeting = new Meeting(start, end);
   
-      for (let i = 0; i < this.meetings.length; i++) {
-        if (newMeeting.overlapsWith(this.meetings[i])) {
+      const meetings = this.rooms[roomIndex].meetings;
+      for (let i = 0; i < meetings.length; i++) {
+        if (newMeeting.overlapsWith(meetings[i])) {
           return false;
         }
       }
   
-      this.meetings.push(newMeeting);   // Add new meeting to the meetings array
-      this.displaySchedule();
+      meetings.push(newMeeting); // Add new meeting to the meetings array of the specified room
+      this.displaySchedule(roomIndex);
   
       return true;
     }
   
-    cancel(start) {
-      for (let i = 0; i < this.meetings.length; i++) {
-        if (this.meetings[i].start.getTime() === start.getTime()) {
-          this.meetings.splice(i, 1);   // Removing meeting from meetings array
-          this.displaySchedule();
+    cancel(start, roomIndex) {
+      const meetings = this.rooms[roomIndex].meetings;
+      for (let i = 0; i < meetings.length; i++) {
+        if (meetings[i].start.getTime() === start.getTime()) {
+          meetings.splice(i, 1); // Removing meeting from meetings array of the specified room
+          this.displaySchedule(roomIndex);
   
           return true;
         }
@@ -46,52 +50,56 @@ class Meeting {
       return false;
     }
   
-    displaySchedule() {
-      const meetingsList = document.getElementById("meetings-list");
+    displaySchedule(roomIndex) {
+      const meetingsList = document.getElementById(`meetings-list-${roomIndex}`);
       meetingsList.innerHTML = "";
   
-      for (let i = 0; i < this.meetings.length; i++) {
-        const meeting = this.meetings[i];
+      const meetings = this.rooms[roomIndex].meetings;
+      for (let i = 0; i < meetings.length; i++) {
+        const meeting = meetings[i];
         const listItem = document.createElement("li");
         listItem.innerText = `${meeting.start.toLocaleString()} - ${meeting.end.toLocaleString()}`;
         meetingsList.appendChild(listItem);
       }
     }
   }
-
-
-  const scheduler = new Scheduler();
   
-  const bookForm = document.querySelector("form");
-  bookForm.addEventListener("submit", (event) => {
-    event.preventDefault();
+  const scheduler = new Scheduler(2); // Create a scheduler with 2 meeting rooms. Can be changed to account for more rooms.
   
-    const startTimeInput = document.getElementById("start-time");
-    const endTimeInput = document.getElementById("end-time");
+  const bookForms = document.querySelectorAll("form.book");
+  bookForms.forEach((bookForm, roomIndex) => {
+    bookForm.addEventListener("submit", (event) => {
+      event.preventDefault();
   
-    const startTime = new Date(startTimeInput.value);
-    const endTime = new Date(endTimeInput.value);
+      const startTimeInput = bookForm.querySelector(".start-time");
+      const endTimeInput = bookForm.querySelector(".end-time");
   
-    if (scheduler.book(startTime, endTime)) {
-      startTimeInput.value = "";
-      endTimeInput.value = "";
-    } else {
-      alert("That time slot is already booked. Please choose another.");
-    }
+      const startTime = new Date(startTimeInput.value);
+      const endTime = new Date(endTimeInput.value);
+  
+      if (scheduler.book(startTime, endTime, roomIndex)) {
+        startTimeInput.value = "";
+        endTimeInput.value = "";
+      } else {
+        alert("That time slot is already booked. Please choose another.");
+      }
+    });
   });
   
-  const cancelForm = document.querySelectorAll("form")[1];
-  cancelForm.addEventListener("submit", (event) => {
-    event.preventDefault();
+  const cancelForms = document.querySelectorAll("form.cancel");
+  cancelForms.forEach((cancelForm, roomIndex) => {
+    cancelForm.addEventListener("submit", (event) => {
+      event.preventDefault();
   
-    const startTimeInput = document.getElementById("cancel-time");
+      const startTimeInput = cancelForm.querySelector(".cancel-time");
   
-    const startTime = new Date(startTimeInput.value);
+      const startTime = new Date(startTimeInput.value);
   
-    if (scheduler.cancel(startTime)) {
-      startTimeInput.value = "";
-    } else {
-      alert("There is no meeting at that time to cancel.");
-    }
+      if (scheduler.cancel(startTime, roomIndex)) {
+        startTimeInput.value = "";
+      } else {
+        alert("There is no meeting at that time to cancel.");
+      }
+    });
   });
   
