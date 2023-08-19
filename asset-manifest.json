@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/mattmac02/Meeting-Room-Scheduler/static/css/main.a302fa0a.css",
+    "main.js": "/mattmac02/Meeting-Room-Scheduler/static/js/main.4cb37846.js",
+    "static/js/787.ca65ba3f.chunk.js": "/mattmac02/Meeting-Room-Scheduler/static/js/787.ca65ba3f.chunk.js",
+    "index.html": "/mattmac02/Meeting-Room-Scheduler/index.html",
+    "main.a302fa0a.css.map": "/mattmac02/Meeting-Room-Scheduler/static/css/main.a302fa0a.css.map",
+    "main.4cb37846.js.map": "/mattmac02/Meeting-Room-Scheduler/static/js/main.4cb37846.js.map",
+    "787.ca65ba3f.chunk.js.map": "/mattmac02/Meeting-Room-Scheduler/static/js/787.ca65ba3f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a302fa0a.css",
+    "static/js/main.4cb37846.js"
+  ]
+}
