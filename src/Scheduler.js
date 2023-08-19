@@ -99,3 +99,4 @@ class Meeting {
     });
   });
   
+export default Scheduler;
